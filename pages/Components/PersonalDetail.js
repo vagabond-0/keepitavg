@@ -14,8 +14,8 @@ const PersonalDetail = () => {
         <div>
             <h1 className="font-jersey text-4xl">Enter your Details</h1>
         </div>
-        <div className="w-full h-full  font-jersey text-6xl overflow-y-auto snap-y snap-mandatory " >
-            <div className="snap-center flex flex-col justify-center items-center  h-screen w-screen">
+        <div className="w-full h-full  font-jersey md:text-6xl text-3xl  overflow-y-auto snap-y snap-mandatory overflow-x-hidden" >
+            <div className="snap-center flex flex-col justify-center items-center  h-screen w-screen overflow-x-hidden">
                 <h1>What Is Your Name?</h1>
                 <input type="text"  className="outline-none border-b-2 border-solid border-black" onKeyDown={handlenameSubmit}/>
             </div>
