@@ -11,6 +11,10 @@ module.exports = {
         background: "var(--background)",
         foreground: "var(--foreground)",
       },
+      fontFamily: {
+        dancing: ['"Dancing Script"', 'cursive'], 
+        jersey: ['"Jersey 15"', 'sans-serif'],
+      },
     },
   },
   plugins: [],
