@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import CircularProgress from '@mui/material/CircularProgress';
-
+import { useRouter } from 'next/router';
 const AttendanceTable = () => {
   const [timetable, setTimetable] = useState(null);
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
-
+  const router = useRouter();
   useEffect(() => {
     // Retrieve data from localStorage
     const storedData = localStorage.getItem('data');
@@ -48,6 +48,13 @@ const AttendanceTable = () => {
 
   return (
     <div className="p-6">
+      <div className='flex justify-end '>
+          <button className='font-jersey border-2 p-2 text-xl ' onClick={async()=>{
+            localStorage.clear()
+            await router.push('/');
+      router.reload();
+          }}> Log out</button>
+        </div>
       <h1 className="text-4xl font-bold text-center mb-6">TKM College of Engineering - Attendance</h1>
 
       <div className="mb-6">
@@ -55,7 +62,7 @@ const AttendanceTable = () => {
         <p><strong>Roll No:</strong> {data["Roll No"] || 'N/A'}</p>
         <p><strong>Name:</strong> {data.Name || 'N/A'}</p>
       </div>
-
+      
       <div className="overflow-x-auto p-4">
         <table className="table-auto w-full border-collapse border border-gray-400 mb-6">
           <thead>
