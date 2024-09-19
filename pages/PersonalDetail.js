@@ -1,16 +1,16 @@
 import React, { useRef, useState } from 'react';
 import axios from 'axios';
 import CircularProgress from '@mui/material/CircularProgress';
-import { useRouter } from 'next/router'; 
+import { useRouter } from 'next/router';
 
 const PersonalDetail = () => {
   const [userId, setUserId] = useState("");
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [msg, setMsg] = useState(false);
-  const [loading, setLoading] = useState(false); 
+  const [loading, setLoading] = useState(false);
   const dateSection = useRef(null);
-  const router = useRouter();  
+  const router = useRouter();
 
   const handlenameSubmit = (e) => {
     if (e.key === 'Enter') {
@@ -31,15 +31,18 @@ const PersonalDetail = () => {
       const user = localStorage.getItem('username');
       const pass = localStorage.getItem('password');
 
-      setLoading(true); 
+      setLoading(true);
 
-      axios.post('http://127.0.0.1:8000/', {
+      axios.post('https://etlabdata.onrender.com/', {
         "username": user,
         "password": pass
       }).then(function (response) {
         console.log(response);
-        setLoading(false); 
-        router.push('/');  // Navigate to the home route using useRouter
+        localStorage.setItem('data', JSON.stringify(response.data));
+        localStorage.setItem('timetable', JSON.stringify(response.data.timatable));
+        localStorage.setItem('attendence', JSON.stringify(response.data.attendence));
+        setLoading(false);
+        router.push('/');  
       }).catch(function (error) {
         console.log(error);
         setLoading(false);
