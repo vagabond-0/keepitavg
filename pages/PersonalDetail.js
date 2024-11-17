@@ -5,7 +5,7 @@ import { useRouter } from 'next/router';
 
 const PersonalDetail = () => {
   const [userId, setUserId] = useState("");
-  const [startDate, setStartDate] = useState("");
+  const [threshold, setthreshold] = useState("");
   const [endDate, setEndDate] = useState("");
   const [msg, setMsg] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -19,14 +19,14 @@ const PersonalDetail = () => {
   };
 
   const handleClick = () => {
-    if (userId === "" || startDate === "" || endDate === "") {
+    if (userId === "" || threshold === "" ) {
       setMsg(true);
     } else {
       localStorage.setItem('userid', userId);
-      localStorage.setItem('startdate', startDate);
+      localStorage.setItem('threshold', threshold);
       localStorage.setItem('enddate', endDate);
       setUserId('');
-      setStartDate('');
+      setthreshold('');
       setEndDate('');
       const user = localStorage.getItem('username');
       const pass = localStorage.getItem('password');
@@ -35,7 +35,9 @@ const PersonalDetail = () => {
 
       axios.post('https://etlabdata.onrender.com/', {
         "username": user,
-        "password": pass
+        "password": pass,
+        "threshold":threshold
+
       }).then(function (response) {
         console.log(response);
         localStorage.setItem('data', JSON.stringify(response.data));
@@ -61,11 +63,9 @@ const PersonalDetail = () => {
           <input type="text" className="outline-none border-b-2 border-solid border-black" onKeyDown={handlenameSubmit} value={userId} onChange={(e) => setUserId(e.target.value)} />
         </div>
         <div ref={dateSection} className="snap-center h-screen w-screen flex flex-col justify-center items-center gap-10">
-          <h1>Sem Start Date</h1>
-          <input type="Date" className="outline-none border-b-2 border-solid border-black" value={startDate} onChange={(e) => setStartDate(e.target.value)} />
-          <h1>Sem End Date</h1>
-          <input type="Date" className="outline-none border-b-2 border-solid border-black" value={endDate} onChange={(e) => setEndDate(e.target.value)} />
-          <button className="w-36 text-2xl h-160 rounded-2xl p-2 bg-black text-white" onClick={handleClick}>
+          <h1>Enter the percentage u want to keep</h1>
+          <input type="number" className="outline-none border-b-2 border-solid border-black" value={threshold} onChange={(e) => setthreshold(e.target.value)} />
+         <button className="w-36 text-2xl h-160 rounded-2xl p-2 bg-black text-white" onClick={handleClick}>
             {
               loading ?
                 <div className="flex justify-center items-center w-full h-full z-50 top-0">

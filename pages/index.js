@@ -17,7 +17,7 @@ const Index = () => {
   useEffect(() => {
     setIsClient(true);
     
-    const requiredFields = ['username', 'password', 'userid', 'startdate', 'enddate'];
+    const requiredFields = ['username', 'password', 'userid'];
     const storedData = {};
     let allFieldsPresent = true;
 
